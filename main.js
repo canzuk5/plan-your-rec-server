@@ -5,8 +5,8 @@ var app = express();
 app.use('/public', express.static('www'));
 app.use(bodyParser.json({ type: 'application/json', limit: '10mb' }));
 
-app.get(/(^(?!(\/api.))(?!(reqs.)))\S+/, function (req, res) {
-  res.sendFile(path.join(__dirname + '/www/index.html'));
+app.get(/(^(?!(api.))(?!(public.)))\S+/, function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.listen(80, function () {
