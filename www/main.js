@@ -104,8 +104,8 @@ function buildMarker(dataIn) {
   if (dataIn.circle){
     mymap.removeLayer(circle);
   }
-  var circle = L.circle([loc.lat, loc.long], 500, styleMarkerColour(dataIn.status)).addTo(mymap);
-  circle.bindPopup("<b>" + loc.name + "</b>");
+  var circle = L.circle([dataIn.lat, dataIn.long], 500, styleMarkerColour(dataIn.status)).addTo(mymap);
+  circle.bindPopup("<b>" + dataIn.name + "</b>");
   circle.on("click", markerClicked);
   dataIn.circle = circle;
 }
@@ -129,6 +129,8 @@ function styleMarkerColour(statusIn) {
     output.fillColour = "'#999'";
     output.fillOpacity = 0.25;
   }
+
+  return output;
 }
 
 function checkSafe(dataIn) {
