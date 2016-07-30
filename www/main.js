@@ -1,4 +1,12 @@
 var mymap = L.map('mapid').setView([-39.542321, 176.672763], 10);
+var minWind = $('#windSpeedMin');
+var maxWind = $('#windSpeedMax');
+
+var maxHumidity = $('#humidityMax');
+var minHumidity = $('#humidityMin');
+
+var maxTemp = $('#airTempMax');
+var minTemp = $('#airTempMin');
 
 L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2FuenVrIiwiYSI6ImNpcjhlNmltdTAwenRnN20zZzJnaGY2eW0ifQ.V53-PWoukCQNhbBG-cf2tw', {
   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -9,8 +17,31 @@ populateMarkers();
 
 var data = [];
 
+const CONST_STATUS_PASSED = "passed";
+const CONST_STATUS_UNSAFE = "unsafe";
+const CONST_STATUS_PARTIAL = "partial";
+const CONST_STATUS_NONE = "none";
+
 $(document).ready(function() {
     $('select').material_select();
+    minWind.change(function() {
+      updateMarkers();
+    });
+    maxWind.change(function() {
+      updateMarkers();
+    });
+    maxHumidity.change(function() {
+      updateMarkers();
+    });
+    minHumidity.change(function() {
+      updateMarkers();
+    });
+    maxTemp.change(function() {
+      updateMarkers();
+    });
+    minTemp.change(function() {
+      updateMarkers();
+    });
   });
 
 function populateMarkers(){
@@ -21,17 +52,87 @@ function populateMarkers(){
     for (var loc of resultParsed.locations){
       loc.status = "";
       data.push(loc);
-        var circle = L.circle([loc.lat, loc.long], 500, {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5
-}).addTo(mymap);
-      circle.bindPopup("<b>" + loc.name + "</b>");
-      circle.on("click", markerClicked);
     }
+    updateMarkers();
   }
   }
   getUrl("/api/nodes", cb);
+}
+
+function updateMarkers() {
+  for (var loc of data){
+    var windPassed = false;
+    var humidityPassed = false;
+    var tempPassed = false;
+    var isSafe = checkSafe(loc);
+
+if (isSafe){
+
+    if (loc.airTemp != null){
+      if (loc.airTemp > minTemp.val() && loc.airTemp < maxTemp.val()){
+        tempPassed = true;
+      }
+    }
+
+    if (loc.humidity != null){
+      if (loc.humidity > minHumidity.val() && loc.humidity < maxHumidity.val()){
+        humidityPassed = true;
+      }
+    }
+
+    if (loc.windSpeed != null){
+      if (loc.windSpeed > minWind.val() && loc.windSpeed < maxWind.val()){
+        windPassed = true;
+      }
+    }
+
+    if (windPassed && humidityPassed && tempPassed){
+      loc.status = CONST_STATUS_PASSED;
+    } else if (windPassed || humidityPassed || tempPassed) {
+      loc.status = CONST_STATUS_PARTIAL;
+    } else {
+      loc.status = CONST_STATUS_NONE;
+    }
+  } else {
+    loc.status = CONST_STATUS_UNSAFE;
+  }
+  buildMarker(loc);
+  }
+}
+
+function buildMarker(dataIn) {
+  if (dataIn.circle){
+    mymap.removeLayer(circle);
+  }
+  var circle = L.circle([loc.lat, loc.long], 500, styleMarkerColour(dataIn.status)).addTo(mymap);
+  circle.bindPopup("<b>" + loc.name + "</b>");
+  circle.on("click", markerClicked);
+  dataIn.circle = circle;
+}
+
+function styleMarkerColour(statusIn) {
+  var output = {};
+  if (statusIn == CONST_STATUS_UNSAFE) {
+    output.color = "red";
+    output.fillColour = "'#f03'";
+    output.fillOpacity = 0.5;
+  } else if (statusIn == CONST_STATUS_PASSED) {
+    output.color = "green";
+    output.fillColour = "'#0f3'";
+    output.fillOpacity = 0.75;
+  } else if (statusIn == CONST_STATUS_PARTIAL) {
+    output.color = "green";
+    output.fillColour = "'#0f3'";
+    output.fillOpacity = 0.40;
+  } else {
+    output.color = "grey";
+    output.fillColour = "'#999'";
+    output.fillOpacity = 0.25;
+  }
+}
+
+function checkSafe(dataIn) {
+  return true;
 }
 
 function markerClicked(e) {
