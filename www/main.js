@@ -15,7 +15,7 @@ function populateMarkers(){
     data = [];
     for (var loc of resultParsed.locations){
         data.push(loc);
-        var circle = L.circle(loc.lat, loc.long], 200, {
+        var circle = L.circle(loc.lat, loc.long), 200, {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5
