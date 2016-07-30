@@ -45,6 +45,7 @@ for (var row of wantedRows){
 }
 
 app.get("/api/nodes", function (req, res){
+  environmentCount++;
   request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       parseString(body, function (err, result) {
@@ -83,21 +84,19 @@ app.get("/api/nodes", function (req, res){
 });
 
 function getLocationData(baseIn, callback){
-  var count = 0;
-  var countTotal = 0;
-  var countDataPoints = 0;
-  var timeout = setTimeout(function () {
-    console.log("FAIL: " + baseIn.name +" count: " + count + " countTotal: " + countTotal);
-  }, 180000);
+  environmentCount++;
+  console.log(environmentCount);
   request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.name, function (error, response, body1) {
     if (!error && response.statusCode == 200) {
       parseString(body1, function (err, result) {
         if (err){
           callback(err, null);
         } else {
+          var count = 0;
+          var countTotal = 0;
+          var countDataPoints = 0;
           var checkFin = function() {
             if (countDataPoints == result.HilltopServer.DataSource.length && count == countTotal){
-              clearTimeout(timeout);
               dbCon.saveNewLocation(baseIn, callback);
             }
           }
@@ -105,7 +104,7 @@ function getLocationData(baseIn, callback){
           for (var dataPoint of result.HilltopServer.DataSource){
             countDataPoints++;
             if (dataPoint.Measurement){
-              if (dataPoint.Measurement.length == 0){
+              if (dataPoint.Measurement.length > 0){
             countTotal += dataPoint.Measurement.length;
             for (var measurement of dataPoint.Measurement) {
               if (rowNames.indexOf(measurement.$.Name) > -1){
@@ -113,6 +112,8 @@ function getLocationData(baseIn, callback){
                 if (measurement.RequestAs){
                   requestName = measurement.RequestAs;
                 }
+                environmentCount++;
+                console.log(environmentCount);
                 request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.name + '&Measurement=' + requestName, function (error2, response2, body2){
                   if (!error && response.statusCode == 200) {
                     parseString(body2, function (err2, result2) {
@@ -121,75 +122,75 @@ function getLocationData(baseIn, callback){
                         console.log(err2);
                       } else {
                         if (result2.Hilltop){
-                        switch (result2.Hilltop.Measurement.DataSource) {
+                          switch (result2.Hilltop.Measurement[0].DataSource[0].$.Name) {
                           case wantedRows[0].name:
-                          baseIn[wantedRows[0].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[0].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[1].name:
-                          baseIn[wantedRows[1].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[1].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[2].name:
-                          baseIn[wantedRows[2].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[2].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[3].name:
-                          baseIn[wantedRows[3].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[3].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[4].name:
-                          baseIn[wantedRows[4].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[4].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[5].name:
-                          baseIn[wantedRows[5].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[5].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[6].name:
-                          baseIn[wantedRows[6].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[6].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[7].name:
-                          baseIn[wantedRows[7].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[7].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[8].name:
-                          baseIn[wantedRows[8].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[8].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[9].name:
-                          baseIn[wantedRows[9].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[9].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[10].name:
-                          baseIn[wantedRows[10].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[10].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[11].name:
-                          baseIn[wantedRows[11].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[11].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[12].name:
-                          baseIn[wantedRows[12].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[12].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[13].name:
-                          baseIn[wantedRows[13].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[13].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[14].name:
-                          baseIn[wantedRows[14].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[14].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[15].name:
-                          baseIn[wantedRows[15].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[15].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[16].name:
-                          baseIn[wantedRows[16].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[16].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[17].name:
-                          baseIn[wantedRows[17].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[17].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[18].name:
-                          baseIn[wantedRows[18].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[18].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[19].name:
-                          baseIn[wantedRows[19].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[19].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[20].name:
-                          baseIn[wantedRows[20].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[20].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[21].name:
-                          baseIn[wantedRows[21].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[21].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                           case wantedRows[22].name:
-                          baseIn[wantedRows[22].row] = result2.HilltopServer.Measurement.Data.E.Value;
+                          baseIn[wantedRows[22].row] = result2.Hilltop.Measurement[0].Data[0].E.Value;
                           break;
                         }
                       } else {
