@@ -13,15 +13,11 @@ function populateMarkers(){
   var cb = function(resultsIn){
     var resultParsed = JSON.parse(resultsIn);
     data = [];
-    for (var loc of resultParsed){
-      if (loc.Latitude && loc.Longitude){
+    for (var loc of resultParsed.locations){
         data.push(loc);
-      var marker = L.marker([loc.Latitude[0], loc.Longitude[0]]).addTo(mymap);
-      marker.bindPopup("<b>" + loc.$.Name + "</b>");
-      marker.on("click", markerClicked)
-    } else {
-      console.log(JSON.stringify(loc));
-    }
+      var marker = L.marker([loc.lat, loc.long]).addTo(mymap);
+      marker.bindPopup("<b>" + loc.name + "</b>");
+      marker.on("click", markerClicked);
     }
   }
   getUrl("/api/nodes", cb);
@@ -30,9 +26,9 @@ function populateMarkers(){
 function markerClicked(e) {
     var locData = this.getLatLng();
     for (var loc of data) {
-      if (loc.Latitude[0] == locData.lat && loc.Longitude[0] == locData.lng) {
+      if (loc.lat == locData.lat && loc.long == locData.lng) {
         console.log($('#selection'));
-        $('#selection').text(loc.$.Name);
+        $('#selection').text(JSON.stringify(loc));
         break;
       }
     }
