@@ -77,6 +77,23 @@ dbCommands.saveNewLocation = function(dataIn, callback) {
   });
 }
 
+dbCommands.clearLocations(){
+  accessConnection(function(err, conIn){
+    if (err){
+      callback(err, conIn);
+    } else {
+      conIn.query("DELETE FROM tblGeneral", {}, function(err, result){
+        conIn.release();
+        if (err){
+          callback(err, null);
+        }else {
+          callback(null, true);
+        }
+      });
+    }
+  });
+}
+
 function accessConnection(callback){
   pool.getConnection(function(err, connection){
     if (err) {

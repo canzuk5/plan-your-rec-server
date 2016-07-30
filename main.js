@@ -43,41 +43,61 @@ var rowNames = [];
 for (var row of wantedRows){
   rowNames.push(row.name);
 }
-
-app.get("/api/nodes", function (req, res){
+var populateDB = function(){
+  dbCon.clearLocations();
   environmentCount++;
   request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       parseString(body, function (err, result) {
-        var finCount = 0;
+        var startedCount = 0;
 
-        var checkFinish = function() {
-          finCount++;
-          console.log(finCount + " " + result.HilltopServer.Site.length);
-          if (finCount == result.HilltopServer.Site.length){
-            res.setHeader('Content-Type', "application/json");
-            res.writeHead(200);
-            res.end(JSON.stringify(result.HilltopServer.Site));
+        var finish = function() {console.log('Finished.')}
+
+        var errCatcher = function(err, resultLocal){
+          if (err){
+            console.log(err);
           }
+          if (startedCount == result.HilltopServer.Site.length){
+            finish();
+          } else {
+          iteration();
+        }
         }
 
-        for (var location of result.HilltopServer.Site){
-          if (location.Latitude && location.Longitude){
-          var obj = {};
-          obj.name = location.$.Name;
-          obj.lat = location.Latitude[0];
-          obj.long = location.Longitude[0];
-          getLocationData(obj, function(err, success){
-            if (err){
-              console.log("jaja");
-              console.log(err);
-            }
-            checkFinish();
-          });
+        var iteration = function() {
+          console.log("counter: " + startedCount +'/' + result.HilltopServer.Site.length);
+          if (startedCount < result.HilltopServer.Site.length){
+          var item = result.HilltopServer.Site[startedCount];
+          startedCount++;
+          if (item.Latitude && item.Longitude){
+            var obj = {};
+            obj.name = item.$.Name;
+            obj.lat = item.Latitude[0];
+            obj.long = item.Longitude[0];
+            getLocationData(obj, errCatcher);
+          } else {
+            errCatcher("No Lat or long", null);
+          }
         } else {
-          checkFinish();
+          finish();
         }
         }
+
+        iteration();
+      });
+    }
+  });
+}
+
+populateDB();
+
+app.get("/api/nodes", function (req, res){
+  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      parseString(body, function (err, result) {
+        res.setHeader('Content-Type', "application/json");
+        res.writeHead(200);
+        res.end(JSON.stringify(result.HilltopServer.Site));
       });
     }
   });
@@ -85,7 +105,7 @@ app.get("/api/nodes", function (req, res){
 
 function getLocationData(baseIn, callback){
   environmentCount++;
-  console.log(environmentCount);
+  console.log("enviro count:" + environmentCount);
   request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.name, function (error, response, body1) {
     if (!error && response.statusCode == 200) {
       parseString(body1, function (err, result) {
@@ -96,16 +116,20 @@ function getLocationData(baseIn, callback){
           var countTotal = 0;
           var countDataPoints = 0;
           var checkFin = function() {
+                  console.log("checking fin: " + countDataPoints + "/" + result.HilltopServer.DataSource.length + " & " + count + "/" + countTotal);
             if (countDataPoints == result.HilltopServer.DataSource.length && count == countTotal){
               dbCon.saveNewLocation(baseIn, callback);
             }
           }
+          console.log("datapoint length: " + result.HilltopServer.DataSource.length);
           if (result.HilltopServer.DataSource.length > 0){
           for (var dataPoint of result.HilltopServer.DataSource){
+            console.log('starting datapoint iteration.');
             countDataPoints++;
             if (dataPoint.Measurement){
               if (dataPoint.Measurement.length > 0){
             countTotal += dataPoint.Measurement.length;
+            console.log("measurement length: " + dataPoint.Measurement.length);
             for (var measurement of dataPoint.Measurement) {
               if (rowNames.indexOf(measurement.$.Name) > -1){
                 requestName = measurement.$.Name;
@@ -113,7 +137,8 @@ function getLocationData(baseIn, callback){
                   requestName = measurement.RequestAs;
                 }
                 environmentCount++;
-                console.log(environmentCount);
+                console.log("enviro count:" + environmentCount);
+                console.log("getting: " + 'http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.name + '&Measurement=' + requestName);
                 request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.name + '&Measurement=' + requestName, function (error2, response2, body2){
                   if (!error && response.statusCode == 200) {
                     parseString(body2, function (err2, result2) {
@@ -200,18 +225,25 @@ function getLocationData(baseIn, callback){
                     }
                   });
                 } else {
-                  console.log("haha");
                   console.log(error);
                 }
+                console.log('reached end.');
                   count++;
                   checkFin();
                 });
+              } else {
+                console.log("count added BEFORE: " + count);
+                count++;
+                checkFin();
               }
             }
           } else {
+            console.log("count added BEFORE: " + count);
+            count++;
             checkFin();
           }
           } else {
+
             checkFin();
           }
           }
