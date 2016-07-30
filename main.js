@@ -24,7 +24,17 @@ request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=Si
   }
 });
 });
-
+app.get("/api/nodes/2", function (req, res){
+request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    parseString(body, function (err, result) {
+      res.setHeader('Content-Type', "application/json");
+      res.writeHead(200);
+      res.end(JSON.stringify(result.HilltopServer.DataSource));
+    });
+  }
+});
+});
 app.get("/api/nodes/1", function (req, res){
 	var name = "Awatoto AQ"
 request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + name, function (error, response, body) {
