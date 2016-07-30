@@ -37,7 +37,7 @@ dbCommands.saveNewLocation = function(dataIn, callback) {
       insertObj[CONST_DB_HUMIDITY] = dataIn.humidity;
       insertObj[CONST_DB_SOLAR] = dataIn.solar;
       insertObj[CONST_DB_AIR_TEMP] = dataIn.airTemp;
-      conIn.query("INSERT INTO contact SET ?", contactObj, function(err, result){
+      conIn.query("INSERT INTO tblGeneral SET ?", insertObj, function(err, result){
         conIn.release();
         if (err){
           callback(err, null);
