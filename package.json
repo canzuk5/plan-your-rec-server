@@ -4,9 +4,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "4.14.0",
-    "bootstrap": "^3.3.6",
     "body-parser": "1.15.2",
     "mysql": "2.11.1",
-    "request": "2.74.1"
+    "request": "2.74.0",
+    "xml2js": "0.4.17"
   }
 }

@@ -2,10 +2,20 @@
 <title>Hawke's Bay - Where can I...?</title>
 <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
 <link rel="stylesheet" href="/public/styles.css" />
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"  media="screen,projection"/>
 <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 </head>
 <body>
-   <div width='100%' id="mapid"></div>
+  <div class="row">
+   <div class="col s9" id="mapid"></div>
+   <div class="col s3">
+     <p id="selection"></p>
+   </div>
+ </div>
 <a href="/public/about.html">To about</a>
 <script src="/public/main.js"></script>
 </body>
