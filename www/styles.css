@@ -3,3 +3,8 @@
 #bodyPadder {
   padding: 20px;
 }
+
+#textbox {
+padding: 20px;
+float: left;
+}
