@@ -4,6 +4,26 @@ var dbCommands = {}
 
 connectToDB();
 
+function saveNewLocation(dataIn, callback) {
+  accessConnection(function(err, conIn){
+    if (err){
+      callback(err, conIn);
+    } else {
+      console.log("Saving location " + JSON.stringify(dataIn));
+      conIn.query("INSERT INTO contact SET ?", contactObj, function(err, result){
+        conIn.release();
+        if (err){
+          callback(err, null);
+        }else {
+          var output = {};
+          output.contacts = result;
+          callback(null, {msg: "Contact added"});
+        }
+      });
+    }
+  });
+}
+
 function accessConnection(callback){
   pool.getConnection(function(err, connection){
     if (err) {

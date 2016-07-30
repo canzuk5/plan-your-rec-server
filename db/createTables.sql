@@ -1,42 +1,36 @@
 
-CREATE TABLE IF NOT EXISTS `CaNzUk`.`tblGenral` (
-  `idtblGenral` INT NOT NULL,
-  `tblGenralSiteName` VARCHAR(45) NULL,
-  `tblGenralRainfall` DECIMAL(25) NULL COMMENT '24 hour rainfall',
-  `tblGenralHumidity` VARCHAR(45) NULL,
-  `tblGenralSolarRad` VARCHAR(45) NULL,
-  PRIMARY KEY (`idtblGenral`)
-  )
-  
-CREATE TABLE IF NOT EXISTS `CaNzUk`.`tblAir` (
-  `idtblAir` INT NOT NULL,
-  `tblGenral_idtblGenral` INT NOT NULL,
-  `tblAirTemp` VARCHAR(45) NULL,
-  `tblAirWindSpeed` VARCHAR(45) NULL,
-  `tblAirWindDirection` VARCHAR(45) NULL,
-  `tblAirQuality2.5` VARCHAR(45) NULL,
-  `tblAirGustSpeed` VARCHAR(45) NULL,
-  `tblAirQuality10` VARCHAR(45) NULL,
-  PRIMARY KEY (`idtblAir`),
-  INDEX `fk_tblAir_tblGenral_idx` (`tblGenral_idtblGenral` ASC),
-  CONSTRAINT `fk_tblAir_tblGenral`
-    FOREIGN KEY (`tblGenral_idtblGenral`)
-    REFERENCES `CaNzUk`.`tblGenral` (`idtblGenral`)
-   )
-   
-CREATE TABLE IF NOT EXISTS `CaNzUk`.`tblWater` (
-  `idtblWater` INT NOT NULL,
-  `tblGenral_idtblGenral` INT NOT NULL,
-  `tblWaterDepth` VARCHAR(45) NULL,
-  `tblWaterFlowrate` VARCHAR(45) NULL,
-  `tblWaterQuality` VARCHAR(45) NULL,
-  `tblWaterTemp` VARCHAR(45) NULL,
-  `tblWaterTemp` VARCHAR(45) NULL,
-  `tblWaterSwell` VARCHAR(45) NULL,
-  `tblWaterTide` VARCHAR(45) NULL,
-  PRIMARY KEY (`idtblWater`),
-  INDEX `fk_tblWater_tblGenral1_idx` (`tblGenral_idtblGenral` ASC),
-  CONSTRAINT `fk_tblWater_tblGenral1`
-    FOREIGN KEY (`tblGenral_idtblGenral`)
-    REFERENCES `CaNzUk`.`tblGenral` (`idtblGenral`)
-  )
+CREATE TABLE IF NOT EXISTS `canzuk`.`tblGeneral` (
+  `id` INT NOT NULL,
+  `generalSiteName` VARCHAR(45) NOT NULL,
+  `generalRainfall` DECIMAL(5,1),
+  `generalHumidity` VARCHAR(45),
+  `generalSolarRad` VARCHAR(45),
+  `lat` DECIMAL(10,2) NOT NULL,
+  `long` DECIMAL(11,2) NOT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE IF NOT EXISTS `canzuk`.`tblAir` (
+  `id` INT NOT NULL,
+  `general_idtblGeneral` INT NOT NULL,
+  `airTemp` VARCHAR(45) NULL,
+  `airWindSpeed` VARCHAR(45) NULL,
+  `airWindDirection` VARCHAR(45) NULL,
+  `airQuality2.5` VARCHAR(45) NULL,
+  `airGustSpeed` VARCHAR(45) NULL,
+  `airQuality10` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tblAir_tblgeneral_idx` (`general_idtblGeneral` ASC),
+  CONSTRAINT `fk_tblAir_tblGeneral` FOREIGN KEY (`general_idtblGeneral`) REFERENCES `CaNzUk`.`tblgeneral` (`id`));
+
+CREATE TABLE IF NOT EXISTS `canzuk`.`tblWater` (
+  `id` INT NOT NULL,
+  `general_idtblgeneral` INT NOT NULL,
+  `waterDepth` VARCHAR(45) NULL,
+  `waterFlowrate` VARCHAR(45) NULL,
+  `waterQuality` VARCHAR(45) NULL,
+  `waterTemp` VARCHAR(45) NULL,
+  `waterSwell` VARCHAR(45) NULL,
+  `waterTide` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tblWater_tblgeneral1_idx` (`tblgeneral_idtblgeneral` ASC),
+  CONSTRAINT `fk_tblWater_tblGeneral1` FOREIGN KEY (`general_idtblGeneral`) REFERENCES `CaNzUk`.`tblgeneral` (`id`));
