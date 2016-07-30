@@ -182,7 +182,7 @@ function getLocationData(baseIn, callback){
                           case wantedRows[6].name:
                           console.log("PASSED 6: " + wantedRows[6].name);
                           console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
-                          baseIn[wantedRows[6].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
+                          baseIn[wantedRows[6].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                           break;
                           case wantedRows[7].name:
                           console.log("PASSED 7: " + wantedRows[7].name);
