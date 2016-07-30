@@ -1,5 +1,3 @@
-USE DATABASE `canzuk`;
-
 CREATE TABLE IF NOT EXISTS `tblGeneral` (
   `id` INT NOT NULL,
   `generalSiteName` VARCHAR(45) NOT NULL,
