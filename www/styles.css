@@ -1,1 +1,5 @@
 #mapid { height: 100%; }
+
+#bodyPadder {
+  padding: 20px;
+}
