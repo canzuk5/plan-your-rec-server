@@ -10,14 +10,16 @@ function saveNewLocation(dataIn, callback) {
       callback(err, conIn);
     } else {
       console.log("Saving location " + JSON.stringify(dataIn));
+      var insertObj = {};
+      insertObj.generalSiteName = dataIn.name;
+      insertObj.lat = dataIn.lat;
+      insertObj.long = dataIn.long;
       conIn.query("INSERT INTO contact SET ?", contactObj, function(err, result){
         conIn.release();
         if (err){
           callback(err, null);
         }else {
-          var output = {};
-          output.contacts = result;
-          callback(null, {msg: "Contact added"});
+          callback(null, true);
         }
       });
     }
@@ -49,9 +51,9 @@ function connectToDB(){
   pool = mysql.createPool({
     connectionLimit : 100,
     host : 'localhost',
-    user : 'test',
-    password : 'PASSWORD HERE',
-    database : '?'
+    user : 'node',
+    password : 'nodeThrowawayPa$$word',
+    database : 'canzuk'
   });
 }
 
