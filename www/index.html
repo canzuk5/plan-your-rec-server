@@ -1,13 +1,13 @@
 <head>
-<title>Hawke's Bay - Where can I...?</title>
-<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
-<link rel="stylesheet" href="/public/styles.css" />
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"  media="screen,projection"/>
-<script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+  <title>Hawke's Bay - Where can I...?</title>
+  <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+  <link rel="stylesheet" href="/public/styles.css" />
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"  media="screen,projection"/>
+  <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 </head>
 <body>
   <nav>
@@ -19,50 +19,93 @@
     </div>
   </nav>
 
-<div id="bodyPadder">
- <div class="row">
-    <div class="input-field col l3 s12">
-      <input value="Wind Speed" id="Wind_Speed" type="text" class="validate">
-      <label class="active" for="Wind_Speed">Wind Speed</label>
-	  </div>
-	  <div class="input-field col l3 s12">
-	  <input value="Air Temp" id="Air_Temp" type="text" class="validate">
-      <label class="active" for="Air_Temp">Air Temp</label>
-	  </div>
-	  <div class="input-field col l3 s12">
-	  <input value="Water Temp" id="Water_Temp" type="text" class="validate">
-      <label class="active" for="Water_Temp">Water Temp</label>
+  <div id="bodyPadder">
+    <div class="row">
+      <div class="input-field col s6 offset-s3">
+        <select id="activitySelect">
+          <option value="" disabled selected>Select Activity</option>
+          <option value="0">Swimming</option>
+          <option value="1">Kite flying</option>
+        </select>
+        <label for="activitySelect">Activites</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l4 s12">
+        <h5 class="center">Air Temperature</h5>
+        <div class="row">
+          <span>Max</span>
+          <p class="range-field">
+            <input type="range" id="airTempMax" min="-20" max="50" value="30"/>
+          </p>
+        </div>
+        <div class="row">
+          <span>Min</span>
+          <p class="range-field">
+            <input type="range" id="airTempMin" min="-20" max="50" value="10"/>
+          </p>
+        </div>
+      </div>
+      <div class="input-field col l4 s12">
+        <h5 class="center">Humidity</h5>
+        <div class="row">
+          <span>Max</span>
+          <p class="range-field">
+            <input type="range" id="humidityMax" min="0" max="100" value="100"/>
+          </p>
+        </div>
+        <div class="row">
+          <span>Min</span>
+          <p class="range-field">
+            <input type="range" id="humidityMin" min="0" max="100" value="0"/>
+          </p>
+        </div>
+      </div>
+      <div class="input-field col l4 s12">
+        <h5 class="center">Wind Speed</h5>
+        <div class="row">
+          <span>Max</span>
+          <p class="range-field">
+            <input type="range" id="windSpeedMax" min="0" step="0.5" max="150" value="50"/>
+          </p>
+        </div>
+        <div class="row">
+          <span>Min</span>
+          <p class="range-field">
+            <input type="range" id="windSpeedMin" min="0" step="0.5" max="150" value="0"/>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s9" id="mapid"></div>
+      <div class="col s3">
+        <p id="dataName"></p>
+        <p id="dataRain"></p>
+        <p id="dataHumidity"></p>
+        <p id="dataSolar"></p>
+        <p id="dataAirTemp"></p>
+        <p id="dataWindSpeed"></p>
+        <p id="dataWindDirection"></p>
+        <p id="dataAirQuality10"></p>
+        <p id="dataAirQuality25"></p>
+        <p id="dataAirGust"></p>
+        <p id="dataWaterFlow"></p>
+        <p id="dataWaterTemp"></p>
+        <p id="dataTurbidity"></p>
+        <p id="dataEcoli"></p>
+        <p id="dataEnterococci"></p>
+        <p id="dataChroloA"></p>
+        <p id="dataPeriChloro"></p>
+        <p id="dataBlackDisc"></p>
+        <p id="dataAmmoNitro"></p>
+        <p id="dataNitrateNitro"></p>
+        <p id="dataTotalNitro"></p>
+        <p id="dataTotalKJ_Nitro"></p>
+        <p id="dataTotalPhos"></p>
+        <p id="dataDissolvedPhos"></p>
+      </div>
     </div>
   </div>
-  <div class="row">
-   <div class="col s9" id="mapid"></div>
-   <div class="col s3">
-     <p id="dataName"></p>
-     <p id="dataRain"></p>
-     <p id="dataHumidity"></p>
-     <p id="dataSolar"></p>
-     <p id="dataAirTemp"></p>
-     <p id="dataWindSpeed"></p>
-     <p id="dataWindDirection"></p>
-     <p id="dataAirQuality10"></p>
-     <p id="dataAirQuality25"></p>
-     <p id="dataAirGust"></p>
-     <p id="dataWaterFlow"></p>
-     <p id="dataWaterTemp"></p>
-     <p id="dataTurbidity"></p>
-     <p id="dataEcoli"></p>
-     <p id="dataEnterococci"></p>
-     <p id="dataChroloA"></p>
-     <p id="dataPeriChloro"></p>
-     <p id="dataBlackDisc"></p>
-     <p id="dataAmmoNitro"></p>
-     <p id="dataNitrateNitro"></p>
-     <p id="dataTotalNitro"></p>
-     <p id="dataTotalKJ_Nitro"></p>
-     <p id="dataTotalPhos"></p>
-     <p id="dataDissolvedPhos"></p>
-   </div>
- </div>
-</div>
-<script src="/public/main.js"></script>
+  <script src="/public/main.js"></script>
 </body>

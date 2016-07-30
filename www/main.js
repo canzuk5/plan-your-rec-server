@@ -9,14 +9,19 @@ populateMarkers();
 
 var data = [];
 
+$(document).ready(function() {
+    $('select').material_select();
+  });
+
 function populateMarkers(){
   var cb = function(resultsIn){
     var resultParsed = JSON.parse(resultsIn);
     data = [];
     if (resultParsed){
     for (var loc of resultParsed.locations){
-        data.push(loc);
-        var circle = L.circle([loc.lat, loc.long], 200, {
+      loc.status = "";
+      data.push(loc);
+        var circle = L.circle([loc.lat, loc.long], 500, {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5
