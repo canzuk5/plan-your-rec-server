@@ -30,16 +30,6 @@ function populateMarkers(){
 function markerClicked(e) {
     var locData = this.getLatLng();
     for (var loc of data) {
-      if (loc.Latitude[0] == locData.lat){
-        console.log(loc);
-      console.log(locData);
-      console.log("Hit lat.")
-    }
-    if (loc.Longitude[0] == locData.lng){
-      console.log(loc);
-    console.log(locData);
-    console.log("Hit long.")
-  }
       if (loc.Latitude[0] == locData.lat && loc.Longitude[0] == locData.lng) {
         console.log($('#selection'));
         $('#selection').text(loc.$.Name);

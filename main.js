@@ -14,29 +14,43 @@ app.get(/(^(?!(\/api.))(?!(public.)))\S+/, function (req, res) {
 });
 
 app.get("/api/nodes", function (req, res){
-  dbCon.saveNewLocation({name: "Testing", lat: "1234.2334", long:"-123.34", rainfall: "3.2", humidity:"8.5", solar:"2.5", airTemp: "27"}, function (err, res){});
   request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       parseString(body, function (err, result) {
-        res.setHeader('Content-Type', "application/json");
-        res.writeHead(200);
-        res.end(JSON.stringify(result.HilltopServer.Site));
+        var finCount = 0;
+
+        var checkFinish = function() {
+          finCount++;
+          if (finCount == result.length){
+            res.setHeader('Content-Type', "application/json");
+            res.writeHead(200);
+            res.end(JSON.stringify(result.HilltopServer.Site));
+          }
+        }
+        console.log(result);
+        for (var location of result.HilltopServer.Site){
+          getLocationData(location, function(err, success){
+            checkFinish();
+          });
+        }
       });
     }
   });
 });
 
-app.get("/api/nodes/1", function (req, res){
-  var name = "Awatoto AQ"
-  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + name, function (error, response, body) {
+function getLocationData(baseIn, callback){
+  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.$.Name, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       parseString(body, function (err, result) {
-        res.setHeader('Content-Type', "application/json");
-        res.writeHead(200);
-        res.end(JSON.stringify(result.HilltopServer.DataSource));
+        for (var dataPoint of result.HilltopServer.DataSource){
+          if (dataPoint.$.Name == "Dissolved Reactive Phosphorus"){
+            console.log(JSON.stringify(dataPoint));
+          }
+        }
       });
     }
   });
-});
+}
+
 app.listen(80, function () {
 });

@@ -16,12 +16,20 @@ const CONST_DB_WIND_DIRECTION = "airWindDirection";
 const CONST_DB_AIR_QUALITY_25 = "airQuality2.5";
 const CONST_DB_AIR_GUST = "airGustSpeed";
 const CONST_DB_AIR_QUALITY_10 = "airQuality10";
-const CONST_DB_WATER_DEPTH = "waterDepth";
 const CONST_DB_WATER_FLOWRATE = "waterFlowrate";
-const CONST_DB_WATER_QUALITY = "waterQuality";
 const CONST_DB_WATER_TEMP = "waterTemp";
-const CONST_DB_WATER_SWELL = "waterSwell";
-const CONST_DB_WATER_TIDE = "waterTide";
+const CONST_DB_TURBIDITY = "turbidity";
+const CONST_DB_E_COLI = "e_coli";
+const CONST_DB_ENTEROCOCCI = "enterococci";
+const CONST_DB_CHLOROPHYLL_A_CALC = "chlorophyll_a_calc";
+const CONST_DB_PERIPHYTON_CHLOROPHYLL_A = "periphyton_chlorophyll_a";
+const CONST_DB_BLACK_DISC = "black_disc";
+const CONST_DB_AMMONIACAL_NITROGEN = "ammoniacal_nitrogen";
+const CONST_DB_NITRITE_NITROGEN = "nitrite_nitrogen";
+const CONST_DB_TOTAL_NITROGEN = "total_nitrogen";
+const CONST_DB_TOTAL_KJ_NITROGEN = "total_kjeldahl_nitrogen";
+const CONST_DB_TOTAL_PHOSPHORUS = "total_phosphorus";
+const CONST_DB_DISSOLVED_REACTIVE_PHOSPHORUS = "dissolved_reactive_phosphorus";
 
 dbCommands.saveNewLocation = function(dataIn, callback) {
   accessConnection(function(err, conIn){
@@ -42,12 +50,21 @@ dbCommands.saveNewLocation = function(dataIn, callback) {
       insertObj[CONST_DB_AIR_QUALITY_25] = dataIn.airQuality2_5;
       insertObj[CONST_DB_AIR_GUST] = dataIn.airGust;
       insertObj[CONST_DB_AIR_QUALITY_10] = dataIn.airQuality10;
-      insertObj[CONST_DB_WATER_DEPTH] = dataIn.waterDepth;
       insertObj[CONST_DB_WATER_FLOWRATE] = dataIn.flowRate;
-      insertObj[CONST_DB_WATER_QUALITY] = dataIn.waterQuality;
       insertObj[CONST_DB_WATER_TEMP] = dataIn.waterTemp;
-      insertObj[CONST_DB_WATER_SWELL] = dataIn.waterSwell;
-      insertObj[CONST_DB_WATER_TIDE] = dataIn.waterTide;
+      insertObj[CONST_DB_TURBIDITY] = dataIn.turbidity;
+      insertObj[CONST_DB_E_COLI] = dataIn.eColi;
+      insertObj[CONST_DB_ENTEROCOCCI] = dataIn.enterococci;
+      insertObj[CONST_DB_CHLOROPHYLL_A_CALC] = dataIn.chloroA;
+      insertObj[CONST_DB_PERIPHYTON_CHLOROPHYLL_A] = dataIn.periChloro;
+      insertObj[CONST_DB_BLACK_DISC] = dataIn.blackDisc;
+      insertObj[CONST_DB_AMMONIACAL_NITROGEN] = dataIn.ammoNitro;
+      insertObj[CONST_DB_NITRITE_NITROGEN] = dataIn.nitrateNitro;
+      insertObj[CONST_DB_TOTAL_NITROGEN] = dataIn.totalNitro;
+      insertObj[CONST_DB_TOTAL_KJ_NITROGEN] = dataIn.totalKJ_Nitro;
+      insertObj[CONST_DB_TOTAL_PHOSPHORUS] = dataIn.totalPhos;
+      insertObj[CONST_DB_DISSOLVED_REACTIVE_PHOSPHORUS] = dataIn.dissolvedReactivePhos;
+
       conIn.query("INSERT INTO tblGeneral SET ?", insertObj, function(err, result){
         conIn.release();
         if (err){
