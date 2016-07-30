@@ -102,7 +102,7 @@ if (isSafe){
 
 function buildMarker(dataIn) {
   if (dataIn.circle){
-    mymap.removeLayer(circle);
+    mymap.removeLayer(dataIn.circle);
   }
   var circle = L.circle([dataIn.lat, dataIn.long], 500, styleMarkerColour(dataIn.status)).addTo(mymap);
   circle.bindPopup("<b>" + dataIn.name + "</b>");
