@@ -23,7 +23,7 @@ const CONST_DB_WATER_TEMP = "waterTemp";
 const CONST_DB_WATER_SWELL = "waterSwell";
 const CONST_DB_WATER_TIDE = "waterTide";
 
-function saveNewLocation(dataIn, callback) {
+dbCommands.saveNewLocation = function(dataIn, callback) {
   accessConnection(function(err, conIn){
     if (err){
       callback(err, conIn);
