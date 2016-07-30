@@ -15,9 +15,13 @@ function populateMarkers(){
     data = [];
     for (var loc of resultParsed.locations){
         data.push(loc);
-      var marker = L.marker([loc.lat, loc.long]).addTo(mymap);
-      marker.bindPopup("<b>" + loc.name + "</b>");
-      marker.on("click", markerClicked);
+        var circle = L.circle(loc.lat, loc.long], 200, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5
+}).addTo(mymap);
+      circle.bindPopup("<b>" + loc.name + "</b>");
+      circle.on("click", markerClicked);
     }
   }
   getUrl("/api/nodes", cb);
