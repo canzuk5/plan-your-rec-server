@@ -8,7 +8,7 @@ var minHumidity = $('#humidityMin');
 var maxTemp = $('#airTempMax');
 var minTemp = $('#airTempMin');
 
-L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2FuenVrIiwiYSI6ImNpcjhlNmltdTAwenRnN20zZzJnaGY2eW0ifQ.V53-PWoukCQNhbBG-cf2tw', {
+L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2FuenVrIiwiYSI6ImNpcjhlNmltdTAwenRnN20zZzJnaGY2eW0ifQ.V53-PWoukCQNhbBG-cf2tw', {
   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
   maxZoom: 18
 }).addTo(mymap);
@@ -126,7 +126,7 @@ function styleMarkerColour(statusIn) {
     output.fillOpacity = 0.40;
   } else {
     output.color = "grey";
-    output.fillColour = "'#999'";
+    output.fillColour = "#238b45";
     output.fillOpacity = 0.25;
   }
 
