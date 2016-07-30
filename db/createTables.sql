@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `tblGeneral` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `generalSiteName` VARCHAR(1000) NOT NULL,
   `generalRainfall` DECIMAL(5,1),
   `generalHumidity` DECIMAL(4,1),
