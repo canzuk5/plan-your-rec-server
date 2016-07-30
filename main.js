@@ -61,13 +61,21 @@ app.get("/api/nodes", function (req, res){
         }
 
         for (var location of result.HilltopServer.Site){
-          getLocationData(location, function(err, success){
+          if (location.Latitude && location.Longitude){
+          var obj = {};
+          obj.name = location.$.Name;
+          obj.lat = location.Latitude[0];
+          obj.long = location.Longitude[0];
+          getLocationData(obj, function(err, success){
             if (err){
               console.log("jaja");
               console.log(err);
             }
             checkFinish();
           });
+        } else {
+          checkFinish();
+        }
         }
       });
     }
@@ -79,9 +87,9 @@ function getLocationData(baseIn, callback){
   var countTotal = 0;
   var countDataPoints = 0;
   var timeout = setTimeout(function () {
-    console.log("FAIL: " + baseIn.$.Name +" count: " + count + " countTotal: " + countTotal);
+    console.log("FAIL: " + baseIn.name +" count: " + count + " countTotal: " + countTotal);
   }, 180000);
-  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.$.Name, function (error, response, body1) {
+  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.name, function (error, response, body1) {
     if (!error && response.statusCode == 200) {
       parseString(body1, function (err, result) {
         if (err){
@@ -105,11 +113,11 @@ function getLocationData(baseIn, callback){
                 if (measurement.RequestAs){
                   requestName = measurement.RequestAs;
                 }
-                request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.$.Name + '&Measurement=' + requestName, function (error2, response2, body2){
+                request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.name + '&Measurement=' + requestName, function (error2, response2, body2){
                   if (!error && response.statusCode == 200) {
                     parseString(body2, function (err2, result2) {
                       if (err2){
-                        console.log('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.$.Name + '&Measurement=' + requestName);
+                        console.log('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=GetData&Site=' + baseIn.name + '&Measurement=' + requestName);
                         console.log(err2);
                       } else {
                         if (result2.Hilltop){
@@ -185,7 +193,7 @@ function getLocationData(baseIn, callback){
                           break;
                         }
                       } else {
-                        console.log(baseIn.$.Name);
+                        console.log(baseIn.name);
                         console.log(result2);
                       }
                     }
@@ -212,7 +220,7 @@ function getLocationData(baseIn, callback){
         }
         });
       } else {
-        console.log('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.$.Name);
+        console.log('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.name);
         console.log(error);
         callback()
       }
