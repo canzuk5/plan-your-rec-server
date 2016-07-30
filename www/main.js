@@ -134,7 +134,15 @@ function styleMarkerColour(statusIn) {
 }
 
 function checkSafe(dataIn) {
-  return true;
+  if (dataIn.eColi !== null){
+    if (dataIn.eColi > 88){
+      return false
+    } else {
+      return true;
+    }
+  } else {
+    return true;
+  }
 }
 
 function markerClicked(e) {
