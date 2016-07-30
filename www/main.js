@@ -19,6 +19,8 @@ function populateMarkers(){
       var marker = L.marker([loc.Latitude[0], loc.Longitude[0]]).addTo(mymap);
       marker.bindPopup("<b>" + loc.$.Name + "</b>");
       marker.on("click", markerClicked)
+    } else {
+      console.log(JSON.stringify(loc));
     }
     }
   }

@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `tblGeneral` (
   `id` INT NOT NULL,
-  `generalSiteName` VARCHAR(45) NOT NULL,
+  `generalSiteName` VARCHAR(1000) NOT NULL,
   `generalRainfall` DECIMAL(5,1),
   `generalHumidity` VARCHAR(45),
   `generalSolarRad` VARCHAR(45),

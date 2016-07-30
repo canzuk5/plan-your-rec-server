@@ -37,6 +37,17 @@ dbCommands.saveNewLocation = function(dataIn, callback) {
       insertObj[CONST_DB_HUMIDITY] = dataIn.humidity;
       insertObj[CONST_DB_SOLAR] = dataIn.solar;
       insertObj[CONST_DB_AIR_TEMP] = dataIn.airTemp;
+      insertObj[CONST_DB_WIND_SPEED] = dataIn.windSpeed;
+      insertObj[CONST_DB_WIND_DIRECTION] = dataIn.windDirection;
+      insertObj[CONST_DB_AIR_QUALITY_25] = dataIn.airQuality2_5;
+      insertObj[CONST_DB_AIR_GUST] = dataIn.airGust;
+      insertObj[CONST_DB_AIR_QUALITY_10] = dataIn.airQuality10;
+      insertObj[CONST_DB_WATER_DEPTH] = dataIn.waterDepth;
+      insertObj[CONST_DB_WATER_FLOWRATE] = dataIn.flowRate;
+      insertObj[CONST_DB_WATER_QUALITY] = dataIn.waterQuality;
+      insertObj[CONST_DB_WATER_TEMP] = dataIn.waterTemp;
+      insertObj[CONST_DB_WATER_SWELL] = dataIn.waterSwell;
+      insertObj[CONST_DB_WATER_TIDE] = dataIn.waterTide;
       conIn.query("INSERT INTO tblGeneral SET ?", insertObj, function(err, result){
         conIn.release();
         if (err){
