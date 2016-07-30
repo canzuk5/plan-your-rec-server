@@ -262,7 +262,7 @@ function getLocationData(baseIn, callback){
                           case wantedRows[22].name:
                           console.log("PASSED 22: " + wantedRows[22].name);
                           console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
-                          baseIn[wantedRows[22].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
+                          baseIn[wantedRows[22].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                           break;
                         }
                       } else {
