@@ -92,14 +92,10 @@ var populateDB = function(){
 populateDB();
 
 app.get("/api/nodes", function (req, res){
-  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      parseString(body, function (err, result) {
-        res.setHeader('Content-Type', "application/json");
-        res.writeHead(200);
-        res.end(JSON.stringify(result.HilltopServer.Site));
-      });
-    }
+  dbCon.getLocations(function( err, results) {
+    res.setHeader('Content-Type', "application/json");
+    res.writeHead(200);
+    res.end(JSON.stringify(results));
   });
 });
 
