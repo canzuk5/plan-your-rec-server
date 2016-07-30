@@ -1,5 +1,6 @@
+USE DATABASE `canzuk`;
 
-CREATE TABLE IF NOT EXISTS `canzuk`.`tblGeneral` (
+CREATE TABLE IF NOT EXISTS `tblGeneral` (
   `id` INT NOT NULL,
   `generalSiteName` VARCHAR(45) NOT NULL,
   `generalRainfall` DECIMAL(5,1),
@@ -9,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `canzuk`.`tblGeneral` (
   `long` DECIMAL(11,2) NOT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE IF NOT EXISTS `canzuk`.`tblAir` (
+CREATE TABLE IF NOT EXISTS `tblAir` (
   `id` INT NOT NULL,
   `general_idtblGeneral` INT NOT NULL,
   `airTemp` VARCHAR(45) NULL,
@@ -20,9 +21,9 @@ CREATE TABLE IF NOT EXISTS `canzuk`.`tblAir` (
   `airQuality10` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_tblAir_tblgeneral_idx` (`general_idtblGeneral` ASC),
-  CONSTRAINT `fk_tblAir_tblGeneral` FOREIGN KEY (`general_idtblGeneral`) REFERENCES `CaNzUk`.`tblgeneral` (`id`));
+  CONSTRAINT `fk_tblAir_tblGeneral` FOREIGN KEY (`general_idtblGeneral`) REFERENCES `tblgeneral` (`id`));
 
-CREATE TABLE IF NOT EXISTS `canzuk`.`tblWater` (
+CREATE TABLE IF NOT EXISTS `tblWater` (
   `id` INT NOT NULL,
   `general_idtblgeneral` INT NOT NULL,
   `waterDepth` VARCHAR(45) NULL,
@@ -33,4 +34,4 @@ CREATE TABLE IF NOT EXISTS `canzuk`.`tblWater` (
   `waterTide` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_tblWater_tblgeneral1_idx` (`tblgeneral_idtblgeneral` ASC),
-  CONSTRAINT `fk_tblWater_tblGeneral1` FOREIGN KEY (`general_idtblGeneral`) REFERENCES `CaNzUk`.`tblgeneral` (`id`));
+  CONSTRAINT `fk_tblWater_tblGeneral1` FOREIGN KEY (`general_idtblGeneral`) REFERENCES `tblgeneral` (`id`));
