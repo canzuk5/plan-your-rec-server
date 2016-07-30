@@ -77,7 +77,7 @@ dbCommands.saveNewLocation = function(dataIn, callback) {
   });
 }
 
-dbCommands.clearLocations = function(){
+dbCommands.clearLocations = function(callback){
   accessConnection(function(err, conIn){
     if (err){
       callback(err, conIn);

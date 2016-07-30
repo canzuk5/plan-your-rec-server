@@ -44,49 +44,49 @@ for (var row of wantedRows){
   rowNames.push(row.name);
 }
 var populateDB = function(){
-  dbCon.clearLocations();
-  environmentCount++;
-  request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      parseString(body, function (err, result) {
-        var startedCount = 0;
+  dbCon.clearLocations(function() {
+    environmentCount++;
+    request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        parseString(body, function (err, result) {
+          var startedCount = 0;
 
-        var finish = function() {console.log('Finished.')}
+          var finish = function() {console.log('Finished.')}
 
-        var errCatcher = function(err, resultLocal){
-          if (err){
-            console.log(err);
+          var errCatcher = function(err, resultLocal){
+            if (err){
+              console.log(err);
+            }
+            if (startedCount == result.HilltopServer.Site.length){
+              finish();
+            } else {
+            iteration();
           }
-          if (startedCount == result.HilltopServer.Site.length){
+          }
+
+          var iteration = function() {
+            console.log("counter: " + startedCount +'/' + result.HilltopServer.Site.length);
+            if (startedCount < result.HilltopServer.Site.length){
+            var item = result.HilltopServer.Site[startedCount];
+            startedCount++;
+            if (item.Latitude && item.Longitude){
+              var obj = {};
+              obj.name = item.$.Name;
+              obj.lat = item.Latitude[0];
+              obj.long = item.Longitude[0];
+              getLocationData(obj, errCatcher);
+            } else {
+              errCatcher("No Lat or long", null);
+            }
+          } else {
             finish();
-          } else {
-          iteration();
-        }
-        }
-
-        var iteration = function() {
-          console.log("counter: " + startedCount +'/' + result.HilltopServer.Site.length);
-          if (startedCount < result.HilltopServer.Site.length){
-          var item = result.HilltopServer.Site[startedCount];
-          startedCount++;
-          if (item.Latitude && item.Longitude){
-            var obj = {};
-            obj.name = item.$.Name;
-            obj.lat = item.Latitude[0];
-            obj.long = item.Longitude[0];
-            getLocationData(obj, errCatcher);
-          } else {
-            errCatcher("No Lat or long", null);
           }
-        } else {
-          finish();
-        }
-        }
+          }
 
-        iteration();
-      });
-    }
-  });
+          iteration();
+        });
+      }
+    });});
 }
 
 populateDB();
