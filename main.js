@@ -14,6 +14,7 @@ app.get(/(^(?!(\/api.))(?!(public.)))\S+/, function (req, res) {
 });
 
 app.get("/api/nodes", function (req, res){
+  dbCon.saveNewLocation({name: "Testing", lat: "1234.2334", long:"-123.34", rainfall: "3.2", humidity:"8.5", solar:"2.5", airTemp: "27"}, function (err, res){});
   request('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=SiteList&location=LatLong', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       parseString(body, function (err, result) {

@@ -4,6 +4,25 @@ var dbCommands = {}
 
 connectToDB();
 
+const CONST_DB_SITENAME = "generalSiteName";
+const CONST_DB_LAT = "lat";
+const CONST_DB_LONG = "long";
+const CONST_DB_RAINFALL = "generalRainfall";
+const CONST_DB_HUMIDITY = "generalHumidity";
+const CONST_DB_SOLAR = "generalSolarRad";
+const CONST_DB_AIR_TEMP = "airTemp";
+const CONST_DB_WIND_SPEED = "airWindSpeed";
+const CONST_DB_WIND_DIRECTION = "airWindDirection";
+const CONST_DB_AIR_QUALITY_25 = "airQuality2.5";
+const CONST_DB_AIR_GUST = "airGustSpeed";
+const CONST_DB_AIR_QUALITY_10 = "airQuality10";
+const CONST_DB_WATER_DEPTH = "waterDepth";
+const CONST_DB_WATER_FLOWRATE = "waterFlowrate";
+const CONST_DB_WATER_QUALITY = "waterQuality";
+const CONST_DB_WATER_TEMP = "waterTemp";
+const CONST_DB_WATER_SWELL = "waterSwell";
+const CONST_DB_WATER_TIDE = "waterTide";
+
 function saveNewLocation(dataIn, callback) {
   accessConnection(function(err, conIn){
     if (err){
@@ -11,9 +30,13 @@ function saveNewLocation(dataIn, callback) {
     } else {
       console.log("Saving location " + JSON.stringify(dataIn));
       var insertObj = {};
-      insertObj.generalSiteName = dataIn.name;
-      insertObj.lat = dataIn.lat;
-      insertObj.long = dataIn.long;
+      insertObj[CONST_DB_SITENAME] = dataIn.name;
+      insertObj[CONST_DB_LAT] = dataIn.lat;
+      insertObj[CONST_DB_LONG] = dataIn.long;
+      insertObj[CONST_DB_RAINFALL] = dataIn.rainfall;
+      insertObj[CONST_DB_HUMIDITY] = dataIn.humidity;
+      insertObj[CONST_DB_SOLAR] = dataIn.solar;
+      insertObj[CONST_DB_AIR_TEMP] = dataIn.airTemp;
       conIn.query("INSERT INTO contact SET ?", contactObj, function(err, result){
         conIn.release();
         if (err){
