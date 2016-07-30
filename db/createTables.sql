@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `tblGeneral` (
   `airTemp` DECIMAL(5,1),
   `airWindSpeed` DECIMAL(5,2),
   `airWindDirection` DECIMAL(4,1),
-  `airQuality2.5` DECIMAL(5,1),
+  `airQuality25` DECIMAL(5,1),
   `airGustSpeed` DECIMAL(5,2),
   `airQuality10` DECIMAL(5,2),
   `waterFlowrate` DECIMAL(1,1),
