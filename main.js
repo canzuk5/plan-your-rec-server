@@ -84,7 +84,7 @@ var populateDB = function(){
               if (startedCount < result.HilltopServer.Site.length){
                 var item = result.HilltopServer.Site[startedCount];
                 startedCount++;
-                if (!/^Well./.test(item.$.Name)){
+                if (!/^Well\./.test(item.$.Name)){
                 if (item.Latitude && item.Longitude){
                   var obj = {};
                   obj.name = item.$.Name;
