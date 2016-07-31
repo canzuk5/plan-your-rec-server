@@ -27,9 +27,9 @@ $(document).ready(function() {
     $('#windSpeedMinDisplay').text("Min " + minWind.val() + " km/h");
     $('#windSpeedMaxDisplay').text("Max " + maxWind.val() + " km/h");
     $('#humidityMaxDisplay').text("Max " + maxHumidity.val() + "%");
-    $('#humidityMinDisplay').text("Max " + minHumidity.val() + "%");
+    $('#humidityMinDisplay').text("Min " + minHumidity.val() + "%");
     $('#airTempMaxDisplay').text("Max " + maxTemp.val() + "°C");
-    $('#airTempMinDisplay').text("Max " + minTemp.val() + "°C");
+    $('#airTempMinDisplay').text("Min " + minTemp.val() + "°C");
     minWind.change(function() {
       updateMarkers();
       $('#windSpeedMinDisplay').text("Min " + minWind.val() + " km/h");
@@ -165,12 +165,26 @@ function buildPopUp(dataIn) {
 function checkSafe(dataIn) {
   if (dataIn.eColi !== null){
     if (dataIn.eColi > 88){
-      return false
-    } else {
-      return true;
+      return false;
     }
-  } else {
-    return true;
+  }
+
+  if (dataIn.airQuality25 !== null) {
+    if (dataIn.airQuality25 > 50){
+      return false;
+    }
+  }
+
+  if (dataIn.airQuality10 !== null) {
+    if (dataIn.airQuality10 > 50){
+      return false;
+    }
+  }
+
+  if (dataIn.airGust !== null) {
+    if (dataIn.airGust > 50){
+      return false;
+    }
   }
 }
 
