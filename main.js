@@ -66,44 +66,43 @@ var populateDB = function(){
                   console.log('Finished.');
                 }
               });
-            });
-          }
-
-          var errCatcher = function(err, resultLocal){
-            if (err){
-              console.log(err);
             }
-            if (startedCount == result.HilltopServer.Site.length){
-              finish();
-            } else {
-              iteration();
-            }
-          }
 
-          var iteration = function() {
-            //console.log("counter: " + startedCount +'/' + result.HilltopServer.Site.length);
-            if (startedCount < result.HilltopServer.Site.length){
-              var item = result.HilltopServer.Site[startedCount];
-              startedCount++;
-              if (item.Latitude && item.Longitude){
-                var obj = {};
-                obj.name = item.$.Name;
-                obj.lat = item.Latitude[0];
-                obj.long = item.Longitude[0];
-                getLocationData(obj, errCatcher, conIn);
-              } else {
-                errCatcher("No Lat or long", null);
+            var errCatcher = function(err, resultLocal){
+              if (err){
+                console.log(err);
               }
-            } else {
-              finish();
+              if (startedCount == result.HilltopServer.Site.length){
+                finish();
+              } else {
+                iteration();
+              }
             }
-          }
-          iteration();
-        });
-      }
-    });
-  }
-});
+
+            var iteration = function() {
+              //console.log("counter: " + startedCount +'/' + result.HilltopServer.Site.length);
+              if (startedCount < result.HilltopServer.Site.length){
+                var item = result.HilltopServer.Site[startedCount];
+                startedCount++;
+                if (item.Latitude && item.Longitude){
+                  var obj = {};
+                  obj.name = item.$.Name;
+                  obj.lat = item.Latitude[0];
+                  obj.long = item.Longitude[0];
+                  getLocationData(obj, errCatcher, conIn);
+                } else {
+                  errCatcher("No Lat or long", null);
+                }
+              } else {
+                finish();
+              }
+            }
+            iteration();
+          });
+        }
+      });
+    }
+  });
 }
 
 populateDB();
