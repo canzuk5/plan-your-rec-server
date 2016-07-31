@@ -113,19 +113,15 @@ function buildMarker(dataIn) {
 function styleMarkerColour(statusIn) {
   var output = {};
   if (statusIn == CONST_STATUS_UNSAFE) {
-    output.color = "red";
     output.fillColour = "#ca0020";
     output.fillOpacity = 0.5;
   } else if (statusIn == CONST_STATUS_PASSED) {
-    output.color = "green";
     output.fillColour = "#0571b0";
     output.fillOpacity = 0.75;
   } else if (statusIn == CONST_STATUS_PARTIAL) {
-    output.color = "green";
     output.fillColour = "#92c5de";
     output.fillOpacity = 0.40;
   } else {
-    output.color = "grey";
     output.fillColour = "#f4a582";
     output.fillOpacity = 0.25;
   }
@@ -138,12 +134,12 @@ function buildPopUp(dataIn) {
   if (dataIn.status == CONST_STATUS_UNSAFE) {
     output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-red right">warning</i><p>The conditions here are risky.</p></div>'
   } else if (dataIn.status == CONST_STATUS_PASSED) {
-    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-green right">done all</i><p>This matches all of your filters.</p></div>'
+    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-green right">done_all</i><p>This matches all of your filters.</p></div>'
   } else if (dataIn.status == CONST_STATUS_PARTIAL) {
     output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-green right">done</i><p>This matches some of your filters.</p></div>'
 
   } else {
-    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons right">sync problem</i><p>Not enough data or doesn\'t match your filters.</p></div>'
+    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons right">sync_problem</i><p>Not enough data or doesn\'t match your filters.</p></div>'
 
   }
   console.log(output);
