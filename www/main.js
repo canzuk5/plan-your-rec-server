@@ -105,7 +105,7 @@ function buildMarker(dataIn) {
     mymap.removeLayer(dataIn.circle);
   }
   var circle = L.circle([dataIn.lat, dataIn.long], 500, styleMarkerColour(dataIn.status)).addTo(mymap);
-  circle.bindPopup("<b>" + dataIn.name + "</b>");
+  circle.bindPopup(buildPopUp(dataIn));
   circle.on("click", markerClicked);
   dataIn.circle = circle;
 }
@@ -114,22 +114,41 @@ function styleMarkerColour(statusIn) {
   var output = {};
   if (statusIn == CONST_STATUS_UNSAFE) {
     output.color = "red";
-    output.fillColour = "'#f03'";
+    output.fillColour = "#ca0020";
     output.fillOpacity = 0.5;
   } else if (statusIn == CONST_STATUS_PASSED) {
     output.color = "green";
-    output.fillColour = "'#0f3'";
+    output.fillColour = "#0571b0";
     output.fillOpacity = 0.75;
   } else if (statusIn == CONST_STATUS_PARTIAL) {
     output.color = "green";
-    output.fillColour = "'#0f3'";
+    output.fillColour = "#92c5de";
     output.fillOpacity = 0.40;
   } else {
     output.color = "grey";
-    output.fillColour = "#238b45";
+    output.fillColour = "#f4a582";
     output.fillOpacity = 0.25;
   }
+  return output;
+}
 
+function buildPopUp(dataIn) {
+  var output = "";
+  if (dataIn.statusIn == CONST_STATUS_UNSAFE) {
+    output += '<div><p>' + dataIn.name + '</p><i class="large material-icons md-red right">warning</i><p>This point is unsafe!</p></div>'
+  } else if (dataIn.statusIn == CONST_STATUS_PASSED) {
+    output.color = "green";
+    output.fillColour = "#0571b0";
+    output.fillOpacity = 0.75;
+  } else if (dataIn.statusIn == CONST_STATUS_PARTIAL) {
+    output.color = "green";
+    output.fillColour = "#92c5de";
+    output.fillOpacity = 0.40;
+  } else {
+    output.color = "grey";
+    output.fillColour = "#f4a582";
+    output.fillOpacity = 0.25;
+  }
   return output;
 }
 
