@@ -32,7 +32,7 @@ const CONST_DB_TOTAL_PHOSPHORUS = "total_phosphorus";
 const CONST_DB_DISSOLVED_REACTIVE_PHOSPHORUS = "dissolved_reactive_phosphorus";
 
 dbCommands.saveNewLocation = function(dataIn, callback, conIn) {
-  console.log("Saving location " + JSON.stringify(dataIn));
+  //console.log("Saving location " + JSON.stringify(dataIn));
   var insertObj = {};
   insertObj[CONST_DB_SITENAME] = dataIn.name;
   insertObj[CONST_DB_LAT] = dataIn.lat;
