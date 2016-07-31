@@ -133,6 +133,7 @@ function styleMarkerColour(statusIn) {
 }
 
 function buildPopUp(dataIn) {
+  console.log(dataIn);
   var output = "";
   if (dataIn.statusIn == CONST_STATUS_UNSAFE) {
     output += '<div><p>' + dataIn.name + '</p><i class="large material-icons md-red right">warning</i><p>This point is unsafe!</p></div>'
@@ -149,6 +150,7 @@ function buildPopUp(dataIn) {
     output.fillColour = "#f4a582";
     output.fillOpacity = 0.25;
   }
+  console.log(output);
   return output;
 }
 
