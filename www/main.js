@@ -135,13 +135,13 @@ function styleMarkerColour(statusIn) {
 function buildPopUp(dataIn) {
   console.log(dataIn);
   var output = "";
-  if (dataIn.statusIn == CONST_STATUS_UNSAFE) {
+  if (dataIn.status == CONST_STATUS_UNSAFE) {
     output += '<div><p>' + dataIn.name + '</p><i class="large material-icons md-red right">warning</i><p>This point is unsafe!</p></div>'
-  } else if (dataIn.statusIn == CONST_STATUS_PASSED) {
+  } else if (dataIn.status == CONST_STATUS_PASSED) {
     output.color = "green";
     output.fillColour = "#0571b0";
     output.fillOpacity = 0.75;
-  } else if (dataIn.statusIn == CONST_STATUS_PARTIAL) {
+  } else if (dataIn.status == CONST_STATUS_PARTIAL) {
     output.color = "green";
     output.fillColour = "#92c5de";
     output.fillOpacity = 0.40;
