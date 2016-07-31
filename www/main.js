@@ -113,15 +113,19 @@ function buildMarker(dataIn) {
 function styleMarkerColour(statusIn) {
   var output = {};
   if (statusIn == CONST_STATUS_UNSAFE) {
+    output.color = '#ca0020';
     output.fillColour = "#ca0020";
     output.fillOpacity = 0.5;
   } else if (statusIn == CONST_STATUS_PASSED) {
+    output.colour = '#0571b0';
     output.fillColour = "#0571b0";
     output.fillOpacity = 0.75;
   } else if (statusIn == CONST_STATUS_PARTIAL) {
+    output.colour = '#92c5de';
     output.fillColour = "#92c5de";
     output.fillOpacity = 0.40;
   } else {
+    output.colour = '#f4a582';
     output.fillColour = "#f4a582";
     output.fillOpacity = 0.25;
   }
