@@ -225,14 +225,14 @@ function parseData(dataIn){
 
   if (dataIn.airQuality10 !== null){
     $('#dataAirQuality10').show();
-    $('#dataAirQuality10').text("Air Quality 10: " + dataIn.airQuality10 + " μg/m³");
+    $('#dataAirQuality10').text("Air Quality PM10: " + dataIn.airQuality10 + " μg/m³");
   } else {
     $('#dataAirQuality10').hide();
   }
 
   if (dataIn.airQuality25 !== null){
     $('#dataAirQuality25').show();
-    $('#dataAirQuality25').text("Air Quality 25: " + dataIn.airQuality25 + " μg/m³");
+    $('#dataAirQuality25').text("Air Quality PM2.5: " + dataIn.airQuality25 + " μg/m³");
   } else {
     $('#dataAirQuality25').hide();
   }

@@ -106,6 +106,7 @@ var populateDB = function(){
 }
 
 populateDB();
+setInterval(populateDB, 3000);
 
 app.get("/api/nodes", function (req, res){
   dbCon.getLocations(function( err, results) {
@@ -159,127 +160,127 @@ function getLocationData(baseIn, callback, conIn){
                               console.log(err2);
                             } else {
                               if (result2.Hilltop){
-                                console.log("Result name: " + result2.Hilltop.Measurement[0].DataSource[0].$.Name);
+                                //console.log("Result name: " + result2.Hilltop.Measurement[0].DataSource[0].$.Name);
                                 switch (result2.Hilltop.Measurement[0].DataSource[0].$.Name) {
                                   case wantedRows[0].name:
-                                  console.log("PASSED 0: " + wantedRows[0].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 0: " + wantedRows[0].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[0].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[1].name:
-                                  console.log("PASSED 1: " + wantedRows[1].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 1: " + wantedRows[1].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[1].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[2].name:
-                                  console.log("PASSED 2: " + wantedRows[2].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 2: " + wantedRows[2].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[2].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[3].name:
-                                  console.log("PASSED 3: " + wantedRows[3].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 3: " + wantedRows[3].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[3].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[4].name:
-                                  console.log("PASSED 4: " + wantedRows[4].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 4: " + wantedRows[4].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[4].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[5].name:
-                                  console.log("PASSED 5: " + wantedRows[5].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 5: " + wantedRows[5].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[5].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[6].name:
-                                  console.log("PASSED 6: " + wantedRows[6].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 6: " + wantedRows[6].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[6].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[7].name:
-                                  console.log("PASSED 7: " + wantedRows[7].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 7: " + wantedRows[7].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[7].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[8].name:
-                                  console.log("PASSED 8: " + wantedRows[8].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 8: " + wantedRows[8].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[8].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[9].name:
-                                  console.log("PASSED 9: " + wantedRows[9].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 9: " + wantedRows[9].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[9].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[10].name:
-                                  console.log("PASSED 10: " + wantedRows[10].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 10: " + wantedRows[10].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[10].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                   case wantedRows[11].name:
-                                  console.log("PASSED 11: " + wantedRows[11].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 11: " + wantedRows[11].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[11].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[12].name:
-                                  console.log("PASSED 12: " + wantedRows[12].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 12: " + wantedRows[12].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[12].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[13].name:
-                                  console.log("PASSED 13: " + wantedRows[13].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 13: " + wantedRows[13].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[13].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[14].name:
-                                  console.log("PASSED 14: " + wantedRows[14].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 14: " + wantedRows[14].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[14].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[15].name:
-                                  console.log("PASSED 15: " + wantedRows[15].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 15: " + wantedRows[15].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[15].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[16].name:
-                                  console.log("PASSED 16: " + wantedRows[16].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 16: " + wantedRows[16].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[16].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[17].name:
-                                  console.log("PASSED 17: " + wantedRows[17].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 17: " + wantedRows[17].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[17].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[18].name:
-                                  console.log("PASSED 18: " + wantedRows[18].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 18: " + wantedRows[18].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[18].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[19].name:
-                                  console.log("PASSED 19: " + wantedRows[19].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 19: " + wantedRows[19].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[19].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[20].name:
-                                  console.log("PASSED 20: " + wantedRows[20].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 20: " + wantedRows[20].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[20].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[21].name:
-                                  console.log("PASSED 21: " + wantedRows[21].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 21: " + wantedRows[21].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[21].row] = result2.Hilltop.Measurement[0].Data[0].E[0].Value[0];
                                   break;
                                   case wantedRows[22].name:
-                                  console.log("PASSED 22: " + wantedRows[22].name);
-                                  console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
+                                  //console.log("PASSED 22: " + wantedRows[22].name);
+                                  //console.log(JSON.stringify(result2.Hilltop.Measurement[0].Data[0]));
                                   baseIn[wantedRows[22].row] = result2.Hilltop.Measurement[0].Data[0].E[0].I1[0];
                                   break;
                                 }
                               } else {
-                                console.log(baseIn.name);
-                                console.log(result2);
+                                //console.log(baseIn.name);
+                                //console.log(result2);
                               }
                             }
                           });
@@ -311,7 +312,7 @@ function getLocationData(baseIn, callback, conIn){
         }
       });
     } else {
-      console.log('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.name);
+      //console.log('http://data.hbrc.govt.nz/Envirodata/EMAR.hts?service=Hilltop&request=MeasurementList&Site=' + baseIn.name);
       console.log(error);
       callback()
     }
