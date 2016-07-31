@@ -148,7 +148,7 @@ function buildPopUp(dataIn) {
   console.log(dataIn);
   var output = "";
   if (dataIn.status == CONST_STATUS_UNSAFE) {
-    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-red right">warning</i><p>The conditions here are risky.</p></div>'
+    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-red right">warning</i><p>These conditions may not be suitable for your activity.</p></div>'
   } else if (dataIn.status == CONST_STATUS_PASSED) {
     output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-green right">done_all</i><p>This matches all of your filters.</p></div>'
   } else if (dataIn.status == CONST_STATUS_PARTIAL) {
@@ -164,7 +164,7 @@ function buildPopUp(dataIn) {
 
 function checkSafe(dataIn) {
   if (dataIn.eColi !== null){
-    if (dataIn.eColi > 88){
+    if (dataIn.eColi > 260){
       return false;
     }
   }
@@ -177,6 +177,18 @@ function checkSafe(dataIn) {
 
   if (dataIn.airQuality10 !== null) {
     if (dataIn.airQuality10 > 50){
+      return false;
+    }
+  }
+
+  if (dataIn.airGust !== null) {
+    if (dataIn.airGust > 50){
+      return false;
+    }
+  }
+
+  if (dataIn.enterococci !== null) {
+    if (dataIn.enterococci > 280){
       return false;
     }
   }
