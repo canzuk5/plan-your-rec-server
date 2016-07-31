@@ -267,14 +267,14 @@ function parseData(dataIn){
 
   if (dataIn.eColi !== null){
     $('#dataEcoli').show();
-    $('#dataEcoli').text("E. Coli: " + dataIn.eColi + " CFU/100ml");
+    $('#dataEcoli').text("E. Coli: " + dataIn.eColi + " CFU/100 mL");
   } else {
     $('#dataEcoli').hide();
   }
 
   if (dataIn.enterococci !== null){
     $('#dataEnterococci').show();
-    $('#dataEnterococci').text("Enterococci: " + dataIn.enterococci + " CFU/100ml");
+    $('#dataEnterococci').text("Enterococci: " + dataIn.enterococci + " CFU/100 mL");
   } else {
     $('#dataEnterococci').hide();
   }
