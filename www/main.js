@@ -24,23 +24,35 @@ const CONST_STATUS_NONE = "none";
 
 $(document).ready(function() {
     $('select').material_select();
+    $('#windSpeedMinDisplay').text("Min " + minWind.val() + " km/h");
+    $('#windSpeedMaxDisplay').text("Max " + maxWind.val() + " km/h");
+    $('#humidityMaxDisplay').text("Max " + maxHumidity.val() + "%");
+    $('#humidityMinDisplay').text("Max " + minHumidity.val() + "%");
+    $('#airTempMaxDisplay').text("Max " + maxTemp.val() + "°C");
+    $('#airTempMinDisplay').text("Max " + minTemp.val() + "°C");
     minWind.change(function() {
       updateMarkers();
+      $('#windSpeedMinDisplay').text("Min " + minWind.val() + " km/h");
     });
     maxWind.change(function() {
       updateMarkers();
+      $('#windSpeedMaxDisplay').text("Max " + maxWind.val() + " km/h");
     });
     maxHumidity.change(function() {
       updateMarkers();
+      $('#humidityMaxDisplay').text("Max " + maxHumidity.val() + "%");
     });
     minHumidity.change(function() {
       updateMarkers();
+      $('#humidityMinDisplay').text("Max " + minHumidity.val() + "%");
     });
     maxTemp.change(function() {
       updateMarkers();
+      $('#airTempMaxDisplay').text("Max " + maxTemp.val() + "°C");
     });
     minTemp.change(function() {
       updateMarkers();
+      $('#airTempMinDisplay').text("Max " + minTemp.val() + "°C");
     });
   });
 
