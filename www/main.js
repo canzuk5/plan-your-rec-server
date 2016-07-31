@@ -183,7 +183,7 @@ function parseData(dataIn){
 
   if (dataIn.rainFall !== null){
     $('#dataRain').show();
-    $('#dataRain').text("Rainfall: " + dataIn.rainFall + "mm");
+    $('#dataRain').text("Rainfall: " + dataIn.rainFall + " mm");
   } else {
     $('#dataRain').hide();
   }
@@ -197,7 +197,7 @@ function parseData(dataIn){
 
   if (dataIn.solar !== null){
     $('#dataSolar').show();
-    $('#dataSolar').text("Solar Radiation: " + dataIn.solar + "");
+    $('#dataSolar').text("Solar Radiation: " + dataIn.solar + " W/m²");
   } else {
     $('#dataSolar').hide();
   }
@@ -211,7 +211,7 @@ function parseData(dataIn){
 
   if (dataIn.windSpeed !== null){
     $('#dataWindSpeed').show();
-    $('#dataWindSpeed').text("Wind Speed: " + dataIn.windSpeed + "");
+    $('#dataWindSpeed').text("Wind Speed: " + dataIn.windSpeed + " km/h");
   } else {
     $('#dataWindSpeed').hide();
   }
@@ -225,28 +225,28 @@ function parseData(dataIn){
 
   if (dataIn.airQuality10 !== null){
     $('#dataAirQuality10').show();
-    $('#dataAirQuality10').text("Air Quality 10: " + dataIn.airQuality10 + "");
+    $('#dataAirQuality10').text("Air Quality 10: " + dataIn.airQuality10 + " μg/m³");
   } else {
     $('#dataAirQuality10').hide();
   }
 
   if (dataIn.airQuality25 !== null){
     $('#dataAirQuality25').show();
-    $('#dataAirQuality25').text("Air Quality 25: " + dataIn.airQuality25 + "");
+    $('#dataAirQuality25').text("Air Quality 25: " + dataIn.airQuality25 + " μg/m³");
   } else {
     $('#dataAirQuality25').hide();
   }
 
   if (dataIn.airGust !== null){
     $('#dataAirGust').show();
-    $('#dataAirGust').text("Air Gust: " + dataIn.airGust + "");
+    $('#dataAirGust').text("Air Gust: " + dataIn.airGust + " km/h");
   } else {
     $('#dataAirGust').hide();
   }
 
   if (dataIn.waterFlow !== null){
     $('#dataWaterFlow').show();
-    $('#dataWaterFlow').text("Water Flow: " + dataIn.waterFlow + "");
+    $('#dataWaterFlow').text("Water Flow: " + dataIn.waterFlow + " m³/s");
   } else {
     $('#dataWaterFlow').hide();
   }
@@ -260,84 +260,84 @@ function parseData(dataIn){
 
   if (dataIn.turbidity !== null){
     $('#dataTurbidity').show();
-    $('#dataTurbidity').text("Turbidity: " + dataIn.turbidity + "");
+    $('#dataTurbidity').text("Turbidity: " + dataIn.turbidity + " NTU");
   } else {
     $('#dataTurbidity').hide();
   }
 
   if (dataIn.eColi !== null){
     $('#dataEcoli').show();
-    $('#dataEcoli').text("E Coli: " + dataIn.eColi + "");
+    $('#dataEcoli').text("E. Coli: " + dataIn.eColi + " CFU/100ml");
   } else {
     $('#dataEcoli').hide();
   }
 
   if (dataIn.enterococci !== null){
     $('#dataEnterococci').show();
-    $('#dataEnterococci').text("Enterococci: " + dataIn.enterococci + "");
+    $('#dataEnterococci').text("Enterococci: " + dataIn.enterococci + " CFU/100ml");
   } else {
     $('#dataEnterococci').hide();
   }
 
   if (dataIn.chloroA !== null){
     $('#dataChroloA').show();
-    $('#dataChroloA').text("Chlorophyll A: " + dataIn.chloroA + "");
+    $('#dataChroloA').text("Chlorophyll A: " + dataIn.chloroA + " mg/m²");
   } else {
     $('#dataChroloA').hide();
   }
 
   if (dataIn.periChloro !== null){
     $('#dataPeriChloro').show();
-    $('#dataPeriChloro').text("Periphyton Chlorophyll A: " + dataIn.periChloro + "");
+    $('#dataPeriChloro').text("Periphyton Chlorophyll A: " + dataIn.periChloro + " mg/m²");
   } else {
     $('#dataPeriChloro').hide();
   }
 
   if (dataIn.blackDisc !== null){
     $('#dataBlackDisc').show();
-    $('#dataBlackDisc').text("Black Disck: " + dataIn.blackDisc + "");
+    $('#dataBlackDisc').text("Black Disc: " + dataIn.blackDisc + " m");
   } else {
     $('#dataBlackDisc').hide();
   }
 
   if (dataIn.ammoNitro !== null){
     $('#dataAmmoNitro').show();
-    $('#dataAmmoNitro').text("Ammoniacal Nitrogen: " + dataIn.ammoNitro + "");
+    $('#dataAmmoNitro').text("Ammoniacal Nitrogen: " + dataIn.ammoNitro + " mg/L");
   } else {
     $('#dataAmmoNitro').hide();
   }
 
   if (dataIn.nitrateNitro !== null){
     $('#dataNitrateNitro').show();
-    $('#dataNitrateNitro').text("Nitrate Nitrogen: " + dataIn.nitrateNitro + "");
+    $('#dataNitrateNitro').text("Nitrate Nitrogen: " + dataIn.nitrateNitro + " mg/L");
   } else {
     $('#dataNitrateNitro').hide();
   }
 
   if (dataIn.totalNitro !== null){
     $('#dataTotalNitro').show();
-    $('#dataTotalNitro').text("Total Nitrogen: " + dataIn.totalNitro + "");
+    $('#dataTotalNitro').text("Total Nitrogen: " + dataIn.totalNitro + " mg/L");
   } else {
     $('#dataTotalNitro').hide();
   }
 
   if (dataIn.totalKJ_Nitro !== null){
     $('#dataTotalKJ_Nitro').show();
-    $('#dataTotalJ_Nitro').text("Total KJ Nitrogen: " + dataIn.totalKJ_Nitro + "");
+    $('#dataTotalJ_Nitro').text("Total KJ Nitrogen: " + dataIn.totalKJ_Nitro + " mg/L");
   } else {
     $('#dataTotalKJ_Nitro').hide();
   }
 
   if (dataIn.totalPhos !== null){
     $('#dataTotalPhos').show();
-    $('#dataTotalPhos').text("Total Phosphorus: " + dataIn.totalPhos + "");
+    $('#dataTotalPhos').text("Total Phosphorus: " + dataIn.totalPhos + " mg/L");
   } else {
     $('#dataTotalKJ_Nitro').hide();
   }
 
   if (dataIn.dissolvedReactivePhos !== null){
     $('#dataDissolvedPhos').show();
-    $('#dataDissolvedPhos').text("Dissolved Reactive Phosphorus: " + dataIn.dissolvedReactivePhos + "");
+    $('#dataDissolvedPhos').text("Dissolved Reactive Phosphorus: " + dataIn.dissolvedReactivePhos + " mg/L");
   } else {
     $('#dataDissolvedPhos').hide();
   }
