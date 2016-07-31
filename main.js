@@ -106,7 +106,7 @@ var populateDB = function(){
 }
 
 populateDB();
-setInterval(populateDB, 3000);
+setInterval(populateDB, 900000);
 
 app.get("/api/nodes", function (req, res){
   dbCon.getLocations(function( err, results) {
