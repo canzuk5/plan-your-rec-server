@@ -136,7 +136,7 @@ function buildPopUp(dataIn) {
   console.log(dataIn);
   var output = "";
   if (dataIn.status == CONST_STATUS_UNSAFE) {
-    output += '<div><p>' + dataIn.name + '</p><i class="large material-icons md-red right">warning</i><p>This point is unsafe!</p></div>'
+    output += '<div><p>' + dataIn.name + '</p><i class="small material-icons md-red right">warning</i><p>The conditions here are risky.</p></div>'
   } else if (dataIn.status == CONST_STATUS_PASSED) {
     output.color = "green";
     output.fillColour = "#0571b0";
