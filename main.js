@@ -18,7 +18,7 @@ var wantedRows = [{name: "Rainfall", row: "rainfall"},
 {name: "Humidity", row: "humidity"},
 {name: "Solar Radiation", row: "solar"},
 {name: "Water Temperature (WQ)", row: "waterTemp"},
-{name: "Air Temperature", row: "airTemp"},
+{name: "Avg Air Temperature", row: "airTemp"},
 {name: "Average Wind Speed", row: "windSpeed"},
 {name: "Maximum Wind Speed", row: "airGust"},
 {name: "E. Coli", row: "eColi"},
@@ -302,7 +302,6 @@ function getLocationData(baseIn, callback, conIn){
                   checkFin();
                 }
               } else {
-
                 checkFin();
               }
             }
