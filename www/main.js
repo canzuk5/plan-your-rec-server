@@ -186,6 +186,8 @@ function checkSafe(dataIn) {
       return false;
     }
   }
+
+  return true;
 }
 
 function markerClicked(e) {
